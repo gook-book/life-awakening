@@ -1,0 +1,2 @@
+import {sessionId,db,noStore} from '../../../../lib/access';export const runtime='nodejs';
+export async function GET(){try{const id=await sessionId();if(!id)return noStore({active:false});const r=await db(`access_codes?session_id=eq.${id}&status=eq.activated&select=id,report&limit=1`);if(!r.ok)return noStore({active:false});const rows=await r.json();return noStore({active:!!rows.length,report:rows[0]?.report||null})}catch{return noStore({active:false})}}

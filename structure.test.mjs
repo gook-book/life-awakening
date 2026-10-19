@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
+test('16 base questions, eight followups and four dimensions',()=>{const q=fs.readFileSync('lib/questions.ts','utf8');assert.equal((q.match(/\{id:'[mbsv]\d'/g)||[]).length,16);assert.equal((q.match(/\{id:'f[mbsv]\d'/g)||[]).length,8);for(const d of ['mind','body','spirit','vocation'])assert.ok(q.includes(d));});
+test('API validates and uses only deterministic rules',()=>{const s=fs.readFileSync('app/api/analyze/route.ts','utf8');for(const x of ['validate(parsed.data.answers)','makeReport(parsed.data.answers)'])assert.ok(s.includes(x));for(const x of ['AI_MODE','OPENAI_API_KEY','api.openai.com'])assert.ok(!s.includes(x));});
+test('report includes evidence and four dimensions',()=>{const s=fs.readFileSync('lib/report.ts','utf8');for(const x of ['makeEvidence','dimensions','actions30','actions90','crossImpact'])assert.ok(s.includes(x));});

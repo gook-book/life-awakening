@@ -1,0 +1,1 @@
+import './globals.css';export const metadata={title:'人生觉醒测试｜探索你的成长坐标',description:'基于 HUMAN 3.0 灵感的四维成长探索工具，非临床心理量表'};export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="zh-CN"><body>{children}</body></html>}
